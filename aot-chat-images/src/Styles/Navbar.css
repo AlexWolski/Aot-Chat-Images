@@ -1,0 +1,29 @@
+.navbar {
+  background-color: #8570FF !important;
+  padding: 0em;
+  width: 100vw;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  font-size: 2em;
+  font-weight: bold;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.navbar-divider {
+  width: 2px;
+  height: 2em;
+  background-color: #dddddd;
+}
+
+.nav-link {
+  color: #dddddd !important;
+  font-size: 1.5rem;
+  padding: 1rem !important;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+}
