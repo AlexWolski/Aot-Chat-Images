@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
+import { LuUpload } from "react-icons/lu";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import './App.css';
 import 'react-notifications/dist/react-notifications.css'
 
 function App(props) {
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
-    onDropRejected: () => {
+    onDropRejected: (file: T) => {
       NotificationManager.error('Error message');
     },
 
@@ -22,7 +23,10 @@ function App(props) {
 
       <div {...getRootProps({className: 'dropzone'})}>
         <input {...getInputProps()} />
-        <p>Select an image file</p>
+        <div>
+          <LuUpload size={40} />
+          <p>Select an image to convert</p>
+        </div>
       </div>
     </section>
   );
