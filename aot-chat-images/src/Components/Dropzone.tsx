@@ -1,33 +1,51 @@
+import {useMemo} from 'react';
 import {useDropzone} from 'react-dropzone';
 import { LuUpload } from "react-icons/lu";
-import '../Styles/Dropzone.css';
+import dropzoneStyles from '../Styles/Dropzone.css';
 
 function Dropzone(props) {
   const {
-  	errorCallback
+    errorCallback
   } = props;
 
   const {
-  	acceptedFiles,
-  	getRootProps,
-  	getInputProps
+    acceptedFiles,
+    getRootProps,
+    getInputProps,
+    isDragAccept,
+    isDragReject,
   } = useDropzone({
-  	accept: {
-  		'image/*': []
-  	},
+    accept: {
+      'image/png': ['.png'],
+      'image/jpeg': ['.jpg', '.jpeg'],
+    },
 
     onDropRejected: (file: T) => {
       errorCallback();
     },
-
-    validator: () => ({
-      code: "not-allowed",
-      message: "Failed",
-    }),
   });
 
+  const dropzoneAccept = {
+    backgroundColor:'#e0eeff',
+    borderColor: '#2196f3',
+  };
+
+  const dropzoneReject = {
+    backgroundColor:'#ffe1e1',
+    borderColor: '#f32222',
+  };
+
+  const style = useMemo(() => ({
+    ...dropzoneStyles,
+    ...(isDragAccept ? dropzoneAccept : {}),
+    ...(isDragReject ? dropzoneReject : {}),
+  }), [
+    isDragAccept,
+    isDragReject,
+  ]);
+
   return (
-      <div {...getRootProps({className: 'dropzone'})}>
+      <div {...getRootProps({className: 'dropzone', style})}>
         <input {...getInputProps()} />
         <div>
           <LuUpload size={40} />
