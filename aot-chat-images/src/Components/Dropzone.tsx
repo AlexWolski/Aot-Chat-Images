@@ -3,6 +3,16 @@ import {useDropzone} from 'react-dropzone';
 import { LuUpload } from "react-icons/lu";
 import dropzoneStyles from '../Styles/Dropzone.css';
 
+interface FileError {
+  code: string;
+  message: string;
+}
+
+interface FileUpload {
+  file: File;
+  errors: FileError[];
+}
+
 function Dropzone(props) {
   const {
     errorCallback
@@ -20,10 +30,38 @@ function Dropzone(props) {
       'image/jpeg': ['.jpg', '.jpeg'],
     },
 
-    onDropRejected: (file: T) => {
-      errorCallback();
+    onDropRejected: (files: FileUpload[]): string => {
+      errorCallback(getDropError(files));
     },
+
+    maxFiles: 1,
   });
+
+  const getDropError = (files: FileUpload[]): string => {
+    if (!files.length) {
+      return 'No files were selected';
+    }
+
+    if (files.length > 1) {
+      return 'Only one file can be selected';
+    }
+
+    const file = files[0];
+
+    if (!file.errors.length) {
+      return 'Unknown drop error occured';
+    }
+
+    const error = file.errors[0];
+
+    if (error.code === 'file-invalid-type') {
+      const filePath = files[0].file.path;
+      const extention = filePath.split('.').pop();
+      return 'Invalid file extention: ' + extention;
+    }
+
+    return error.message;
+  }
 
   const dropzoneAccept = {
     backgroundColor:'#e0eeff',

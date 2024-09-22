@@ -7,10 +7,12 @@ import StyledNavbar from '../Components/StyledNavbar.tsx'
 import '../Styles/Homepage.css';
 
 function Homepage(props) {
-  const errorAlert = () =>  { NotificationManager.error('Error message'); }
+  const errorAlert = (errorMessage: string) => {
+    NotificationManager.error(errorMessage);
+  }
 
   return (
-    <section className="container">
+    <section className='container'>
       <NotificationContainer />
       <StyledNavbar />
       <Dropzone errorCallback={errorAlert} />
