@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
-import "react-dropzone/examples/theme.css";
 import './App.css';
 
 function App(props) {
