@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import '../Styles/Navbar.css';
+import '../Styles/StyledNavbar.css';
 
 function StyledNavbar(props) {
   return (
