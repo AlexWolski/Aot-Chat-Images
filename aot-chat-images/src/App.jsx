@@ -1,12 +1,18 @@
+import React, {useEffect, useState} from 'react';
+import {useDropzone} from 'react-dropzone';
+import "react-dropzone/examples/theme.css";
 import './App.css';
 
-function App() {
+function App(props) {
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+
   return (
-    <div className="App">
-        <p>
-          Test
-        </p>
-    </div>
+    <section className="container">
+      <div {...getRootProps({className: 'dropzone'})}>
+        <input {...getInputProps()} />
+        <p>Select an image file</p>
+      </div>
+    </section>
   );
 }
 
